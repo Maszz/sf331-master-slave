@@ -1,0 +1,20 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@internal/prisma/client"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL_SECONDARY")
+}
+
+model Cat {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  age       Int
+  breed     String
+  createdAt DateTime @default(now())
+}
